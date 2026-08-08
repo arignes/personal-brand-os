@@ -158,6 +158,10 @@ Reference: Jelena Burcer content-template carousels (white/editorial, big serif 
 (1) **PDF**: `components/DownloadPdf.tsx` (jsPDF) → "Download PDF" button on Brand page; exports the full brand plan (positioning, tone, audience, pillars, recommendations, sample posts + why). Client-side, instant.
 (2) **Accounts (email identity, cookie-based)**: Advisor now has an email field (= your account); on submit the route saves `email` and sets a `pb_email` cookie so the dashboard auto-loads that person's brand on return. `getActiveBrand` filters by the cookie's email. Returning-user "enter your email to load" + "New person? Start fresh" (clears cookie) on the Advisor. `/api/signin` (POST set cookie, DELETE clear). **Graceful pre-migration fallback**: if the `email` column doesn't exist, insert retries without it and getActiveBrand falls back to latest — so nothing breaks before the migration. **Arina must run one line** (in `web/supabase/advisor.sql`): `alter table advisor_submissions add column if not exists email text;` to activate true per-person accounts. Build green.
 
+## 2026-06-19 — Edit & Save (full CRUD) + per-post regenerate + on GitHub
+
+Pushed project to GitHub: https://github.com/arignes/personal-brand-os (private; secrets audited out, .env.local gitignored). Then built Edit & Save: `PATCH /api/brand` updates the current user's brand row (targeted by pb_email cookie, same row getActiveBrand shows); `components/BrandEditor.tsx` makes positioning/tone/audience/segments/pillars/recommendations/posts inline-editable with Edit → Save/Cancel, persisting to Supabase; per-post "regenerate ↻" via `lib/regenerate-post.ts` + `/api/regenerate-post` (framework-grounded). Verified live: PATCH updates the row (OLD→NEW), regenerate returns a fresh Contrarian-hook post. Brand page now renders BrandEditor (DownloadPdf moved inside). Build green.
+
 ## Open items (waiting on Arina)
 
 - [ ] Interview Q27–100 → finishes `brand/*.md` (goals, audience, off-limits topics, wins/failures)
