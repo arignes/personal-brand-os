@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #720808;
+  --color-primary: #a10728;
+  --color-blush: #fec6d3;
+  --color-surface: #f6e6e5;
+  --color-accent: #bad4ed;
+  --color-accent-soft: #dae9f7;
+  --color-paper: #f6f0ea;
+  --color-card: #fffdfa;
+  --color-line: #e8d8d4;
+  --color-muted: #8a5a52;
+  --color-faint: #b08a84;
+  --color-olive: #5f6e3a;
+  --color-navy: #0c447c;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --shadow-soft: 0 1px 2px rgba(114, 8, 8, 0.05), 0 10px 28px rgba(114, 8, 8, 0.09);
+  --shadow-glow: 0 2px 8px rgba(161, 7, 40, 0.3), 0 10px 26px rgba(161, 7, 40, 0.18);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+}
+
+.card-glass {
+  background: rgba(255, 253, 250, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 216, 212, 0.85);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-glow {
+  background: linear-gradient(
+    120deg,
+    rgba(214, 83, 126, 0.22),
+    rgba(161, 7, 40, 0.14)
+  );
+  color: var(--color-primary);
+  border: 1px solid rgba(161, 7, 40, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 1px 2px rgba(161, 7, 40, 0.05),
+    0 8px 22px rgba(161, 7, 40, 0.12);
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(
+    120deg,
+    rgba(214, 83, 126, 0.32),
+    rgba(161, 7, 40, 0.2)
+  );
+}
+.btn-glow:active {
+  transform: translateY(0);
+}
+
+.sparkle {
+  display: inline-block;
+  color: var(--color-primary);
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+.sparkle-slow {
+  animation-delay: 1.3s;
+  color: var(--color-accent);
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.88) rotate(-8deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
