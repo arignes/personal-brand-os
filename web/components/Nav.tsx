@@ -18,7 +18,7 @@ export default function Nav() {
     <header className="sticky top-0 z-10 border-b border-line/60 bg-paper/65 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-2xl items-center justify-between px-4 py-3">
         <Link href="/" className="font-serif text-xl text-ink">
-          arina<span className="text-primary">.</span>
+          brand<span className="text-primary">.</span>os
         </Link>
         <nav className="flex gap-1">
           {tabs.map((tab) => {
